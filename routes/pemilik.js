@@ -34,9 +34,9 @@ router.get("/edit/:id", async (req, res, next) => {
     let rows = await PemilikModel.getById(id);
     res.render("pemilik/edit", {
       id: id,
-      nama_pemilik: rows[0].nama_keahlian,
-      alamat: rows[0].tingkat_keahlian,
-      no_hp: rows[0].id_mahasiswa,
+      nama_pemilik: rows[0].nama_pemilik,
+      alamat: rows[0].alamat,
+      no_hp: rows[0].no_hp,
     });
   } catch (error) {
     next(error);

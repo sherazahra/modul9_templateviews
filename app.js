@@ -5,12 +5,14 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const flash = require("express-flash");
 const session = require("express-session");
+const MemoryStore = require("session-memory-store")(session);
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const pemilikRouter = require("./routes/pemilik");
 const dpiRouter = require("./routes/dpi");
 const alat_tangkapRouter = require("./routes/alat_tangkap");
+const kapalRouter = require("./routes/kapal");
 
 const app = express();
 
@@ -25,13 +27,17 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(
   session({
-    secret: "secret",
-    resave: true,
-    saveUninitialized: true,
     cookie: {
-      maxAge: 60000,
+      maxAge: 60000000000,
+      secure: false,
+      httpOnly: true,
+      sameSite: "strict",
+      // domain: 'domainkkitananti.com',
     },
-    store: new session.MemoryStore(),
+    store: new MemoryStore(),
+    saveUninitialized: true,
+    resave: false,
+    secret: "secret",
   })
 );
 
@@ -42,6 +48,7 @@ app.use("/users", usersRouter);
 app.use("/pemilik", pemilikRouter);
 app.use("/dpi", dpiRouter);
 app.use("/alat_tangkap", alat_tangkapRouter);
+app.use("/kapal", kapalRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
