@@ -17,11 +17,12 @@ router.get("/login", function (req, res, next) {
 });
 
 router.post("/saveusers", async (req, res) => {
-  let { email, password } = req.body;
+  let { email, password, level_users } = req.body;
   let enkripsi = await bcrypt.hash(password, 10);
   let Data = {
     email,
     password: enkripsi,
+    level_users,
   };
   await Model_Users.Store(Data);
   req.flash("success", "Berhasil Login");
@@ -43,7 +44,7 @@ router.post("/log", async (req, res) => {
           res.redirect("/superusers");
         } else if (Data[0].level_users == 2) {
           req.flash("success", "Berhasil login");
-          res.redirect("/");
+          res.redirect("/users");
         } else {
           res.redirect("/login");
         }

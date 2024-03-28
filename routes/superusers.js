@@ -9,7 +9,7 @@ router.get("/", async function (req, res, next) {
     let data = await Model_Users.getId(id);
 
     if (data.length > 0) {
-      if (data[0].level_users !== 1) {
+      if (data[0].level_users != 1) {
         res.redirect("/logout");
       } else {
         res.render("users/super", {
