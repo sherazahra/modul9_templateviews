@@ -14,6 +14,8 @@ const pemilikRouter = require("./routes/pemilik");
 const dpiRouter = require("./routes/dpi");
 const alat_tangkapRouter = require("./routes/alat_tangkap");
 const kapalRouter = require("./routes/kapal");
+const kategoriRouter = require("./routes/kategori");
+const produkRouter = require("./routes/produk");
 
 const app = express();
 
@@ -51,6 +53,8 @@ app.use("/pemilik", pemilikRouter);
 app.use("/dpi", dpiRouter);
 app.use("/alat_tangkap", alat_tangkapRouter);
 app.use("/kapal", kapalRouter);
+app.use("/kategori", kategoriRouter);
+app.use("/produk", produkRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
